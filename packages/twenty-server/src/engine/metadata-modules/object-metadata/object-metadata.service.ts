@@ -255,7 +255,7 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
             isCustom: false,
             isSystem: true,
             workspaceId: objectMetadataInput.workspaceId,
-            defaultValue: { type: 'uuid' },
+            defaultValue: { value: 'uuid' },
           },
           {
             standardId: customObjectStandardFieldIds.name,
@@ -271,7 +271,7 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
             isActive: true,
             isCustom: false,
             workspaceId: objectMetadataInput.workspaceId,
-            defaultValue: { value: 'Untitled' },
+            defaultValue: { value: "'Untitled'" },
           },
           {
             standardId: baseObjectStandardFieldIds.createdAt,
@@ -287,7 +287,7 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
             isActive: true,
             isCustom: false,
             workspaceId: objectMetadataInput.workspaceId,
-            defaultValue: { type: 'now' },
+            defaultValue: { value: 'now' },
           },
           {
             standardId: baseObjectStandardFieldIds.updatedAt,
@@ -304,7 +304,7 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
             isCustom: false,
             isSystem: true,
             workspaceId: objectMetadataInput.workspaceId,
-            defaultValue: { type: 'now' },
+            defaultValue: { value: 'now' },
           },
           {
             standardId: customObjectStandardFieldIds.position,
