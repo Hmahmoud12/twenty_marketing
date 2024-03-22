@@ -8,8 +8,9 @@ import { MessageChannel } from '@/accounts/types/MessageChannel';
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
 import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
-import { SettingsAccountsListCard } from '@/settings/accounts/components/SettingsAccountsListCard';
+import { SettingsAccountsListEmptyStateCard } from '@/settings/accounts/components/SettingsAccountsListEmptyStateCard';
 import { SettingsAccountsSynchronizationStatus } from '@/settings/accounts/components/SettingsAccountsSynchronizationStatus';
+import { SettingsListCard } from '@/settings/components/SettingsListCard';
 import { IconChevronRight } from '@/ui/display/icon';
 import { IconGmail } from '@/ui/display/icon/components/IconGmail';
 
@@ -50,15 +51,20 @@ export const SettingsAccountsEmailsAccountsListCard = () => {
     }),
   );
 
+  if (!messageChannelsWithSyncedEmails.length) {
+    return <SettingsAccountsListEmptyStateCard />;
+  }
+
   return (
-    <SettingsAccountsListCard
-      accounts={messageChannelsWithSyncedEmails}
+    <SettingsListCard
+      items={messageChannelsWithSyncedEmails}
+      getItemLabel={(messageChannel) => messageChannel.handle}
       isLoading={accountsLoading || messageChannelsLoading}
       onRowClick={(messageChannel) =>
         navigate(`/settings/accounts/emails/${messageChannel.id}`)
       }
       RowIcon={IconGmail}
-      RowRightComponent={({ account: messageChannel }) => (
+      RowRightComponent={({ item: messageChannel }) => (
         <StyledRowRightContainer>
           <SettingsAccountsSynchronizationStatus
             synced={messageChannel.isSynced}
